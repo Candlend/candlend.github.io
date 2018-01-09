@@ -4,8 +4,8 @@
 
 # Site
 title: Candle End's Blog
-subtitle:
-description:
+subtitle: Code · Paint · Design
+description: 
 author: Candle End
 language: zh-Hans
 timezone: Asia/Shanghai
@@ -92,3 +92,8 @@ backup:
   # repository: https://github.com/Candlend/candlend.github.io.git
   repo:
     github: git@github.com:Candlend/candlend.github.io.git,backup
+
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
