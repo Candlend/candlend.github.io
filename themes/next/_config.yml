@@ -155,8 +155,8 @@ links_layout: block
 #   Title: http://example.com/
 
 # Sidebar Avatar
-in theme directory(source/images): /images/avatar.gif
-in site  directory(source/uploads): /uploads/avatar.gif
+in theme directory(source/images): http://p2bh4l69u.bkt.clouddn.com/avatar.jpg
+in site  directory(source/uploads): http://p2bh4l69u.bkt.clouddn.com/avatar.jpg
 avatar: http://p2bh4l69u.bkt.clouddn.com/avatar.jpg
 
 # Table Of Contents in the Sidebar
@@ -235,7 +235,7 @@ post_wordcount:
   item_text: true
   wordcount: true
   min2read: true
-  totalcount: true
+  totalcount: false
   separated_meta: true
 
 # Wechat Subscriber
@@ -633,8 +633,8 @@ note:
   #  - modern    bs-callout new (v2-v3) alert style.
   #  - flat      flat callout style with background, like on Mozilla or StackOverflow.
   #  - disabled  disable all CSS styles import of note tag.
-  style: simple
-  icons: false
+  style: flat
+  icons: true
   border_radius: 3
   # Offset lighter of background in % for modern and flat styles (modern: -12 | 12; flat: -18 | 6).
   # Offset also applied to label tag variables. This option can work with disabled note tag.
@@ -647,7 +647,7 @@ label: true
 tabs:
   enable: true
   transition:
-    tabs: false
+    tabs: true
     labels: true
   border_radius: 0
 
@@ -706,7 +706,7 @@ canvas_nest: false
 three_waves: false
 
 # canvas_lines
-canvas_lines: true
+canvas_lines: false
 # canvas_sphere
 canvas_sphere: false
 
@@ -730,55 +730,50 @@ canvas_ribbon:
 vendors:
   # Internal path prefix. Please do not edit it.
   _internal: lib
-
+  
   # Internal version: 2.1.3
-  jquery:
-
+  jquery: https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js
+  
   # Internal version: 2.1.5
   # See: http://fancyapps.com/fancybox/
-  fancybox:
-  fancybox_css:
-
+  # 自定义 fancybox（暂时）
+  fancybox: https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js
+  fancybox_css: https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css
+  
   # Internal version: 1.0.6
   # See: https://github.com/ftlabs/fastclick
-  fastclick:
-
+  fastclick: https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js
+  
   # Internal version: 1.9.7
   # See: https://github.com/tuupola/jquery_lazyload
-  lazyload:
-
+  lazyload: https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js
+  
   # Internal version: 1.2.1
   # See: http://VelocityJS.org
-  velocity:
-
+  velocity: https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js
+  
   # Internal version: 1.2.1
   # See: http://VelocityJS.org
-  velocity_ui:
-
+  velocity_ui: https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js
+  
   # Internal version: 0.7.9
   # See: https://faisalman.github.io/ua-parser-js/
-  ua_parser:
-
+  ua_parser: https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.9/ua-parser.min.js
+  
   # Internal version: 4.6.2
   # See: http://fontawesome.io/
-  fontawesome:
-
-  # Internal version: 1
-  # https://www.algolia.com
-  algolia_instant_js:
-  algolia_instant_css:
-
+  fontawesome: https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css
+  
   # Internal version: 1.0.2
   # See: https://github.com/HubSpot/pace
   # Or use direct links below:
-  # pace: //cdn.bootcss.com/pace/1.0.2/pace.min.js
-  # pace_css: //cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css
-  pace:
-  pace_css:
+  pace: //cdn.bootcss.com/pace/1.0.2/pace.min.js
+  pace_css: //cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css
+
 
   # Internal version: 1.0.0
   # https://github.com/hustcc/canvas-nest.js
-  canvas_nest:
+  canvas_nest: 
 
   # three
   three:
@@ -789,7 +784,7 @@ vendors:
 
   # three_waves
   # https://github.com/jjandxa/canvas_lines
-  canvas_lines:
+  canvas_lines: 
 
   # three_waves
   # https://github.com/jjandxa/canvas_sphere

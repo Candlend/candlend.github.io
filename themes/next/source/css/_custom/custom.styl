@@ -55,3 +55,153 @@ img.img-topic {
 .post-sticky-flag:hover {
     color: #07b39b;
 }
+
+/* 里面的 color 值请改为你博客的！ */
+// 自定义emoji样式
+img#github-emoji {
+    margin: 0px;
+    padding: 0px;
+    display: inline !important;
+    vertical-align: text-bottom;
+    border: none;
+    cursor: text;
+    box-shadow: none;
+}
+// 文章超链接样式（为emoji特设）
+.post-body a {
+    color: rgb(80, 115, 184);
+    border-bottom: none;
+    text-decoration: underline;
+}
+.post-body a:hover {
+    color: rgb(161, 102, 171);
+    border-bottom: none;
+    text-decoration: underline;
+}
+// 标签云页面超链接样式（为emoji特设）
+.tag-cloud a {
+    color: rgb(80, 115, 184);
+    border-bottom: 1px solid rgb(80, 115, 184);
+    text-decoration: none;
+}
+.tag-cloud a:hover {
+    color: rgb(161, 102, 171);
+    border-bottom: 1px solid rgb(161, 102, 171);
+    text-decoration: none;
+}
+// 文章元数据中categories的样式（为emoji特设）
+a.categories {
+    color: rgb(80, 115, 184);
+    border-bottom: none;
+    text-decoration: underline;
+}
+a.categories:hover {
+    color: rgb(161, 102, 171);
+    border-bottom: none;
+    text-decoration: underline;
+}
+// tabs标签（为emoji特设）
+.post-body .tabs ul.nav-tabs li.tab a {
+    text-decoration: none;
+}
+// 图片下方标题设置（为emoji特设）
+a.fancybox{
+    text-decoration: none !important;
+}
+// 按钮样式（为emoji特设）
+.btn {
+    color: #222 !important;
+    text-decoration: none !important;
+    border: 2px solid #222 !important;
+}
+.btn:hover {
+    color: #fff !important;
+}
+// 音乐播放器aplayer
+.aplayer {
+    font-family: Lato, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Heiti SC", STHeiti, "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", "Droid Sans Fallback", "Microsoft YaHei", source-han-sans-simplified-c, sans-serif !important;
+}
+.aplayer-withlrc.aplayer .aplayer-info {
+    background-color: rgb(255, 255, 255);
+}
+// 音乐播放器aplayer歌单
+.aplayer .aplayer-list ol {
+    background-color: rgb(255, 255, 255);
+}
+// 修视频播放器dplayer页面全屏的bug
+.use-motion .post-body {
+    transform: inherit !important;
+}
+// 文章```代码块diff样式
+pre .addition {
+    background: rgb(0,100,0);
+}
+pre .deletion {
+    background: rgb(100,0,0);
+}
+// 文章```代码块顶部样式
+.highlight figcaption {
+    margin: 0em;
+    padding: 0.5em;
+    background: #111111;
+    border-bottom: 0px solid #e9e9e9;
+}
+.highlight figcaption a {
+    color: rgb(80, 115, 184);
+}
+
+body {
+    background: url(http://p2bh4l69u.bkt.clouddn.com/timg.jpg);
+    background-attachment: fixed;
+    background-repeat:no-repeat;
+    background-position:center;
+
+}
+
+.back-to-top {
+    line-height: 1.5;
+    right: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+    background-color: rgb(0,0,0);
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.back-to-top.back-to-top-on {
+    bottom: 10px;
+}
+
+.site-meta {
+    background-color: rgb(50,50,50);
+}
+@media (max-width: 1023px) {
+    .container {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .sidebar {
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    .feed-link {
+        display: none !important;
+    }
+}
+@media (max-width: 767px) {
+    .footer {
+        background-color: rgb(255,255,255);
+    }
+}
+.sidebar-active #sidebar-dimmer {
+    opacity: 0;
+}
+// 移动端左上角菜单按钮
+.site-nav-toggle {
+    top: 35px;
+    left: 10px;
+}
+.btn-bar {
+    background-color: rgb(255, 255, 255);
+}

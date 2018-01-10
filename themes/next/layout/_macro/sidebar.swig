@@ -136,6 +136,8 @@
           {% endif %}
 
           {% include '../_custom/sidebar.swig' %}
+          <div id= "musicplayer">
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=902234440&auto=0&height=32"></iframe>
         </div>
       </section>
 
@@ -173,3 +175,4 @@
     </div>
   </aside>
 {% endmacro %}
+
