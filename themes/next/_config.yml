@@ -97,7 +97,7 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
-  schedule: /schedule/ || calendar
+  # schedule: /schedule/ || calendar
   # gallery: /images/
   # sitemap: /sitemap.xml || sitemap
   # commonweal: /404/ || heartbeat
@@ -155,7 +155,7 @@ links_layout: block
 # Sidebar Avatar
 in theme directory(source/images): /images/avatar.gif
 in site  directory(source/uploads): /uploads/avatar.gif
-avatar: /images/avatar.jpg
+avatar: http://p2bh4l69u.bkt.clouddn.com/avatar.jpg
 
 # Table Of Contents in the Sidebar
 toc:
@@ -244,8 +244,8 @@ post_wordcount:
 
 # Reward
 reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
-wechatpay: /images/wechatpay.png
-alipay: /images/alipay.jpg
+wechatpay: http://p2bh4l69u.bkt.clouddn.com/wechatpay.png
+alipay: http://p2bh4l69u.bkt.clouddn.com/alipay.jpg
 #bitcoin: /images/bitcoin.png
 
 # Declare license on posts
@@ -408,7 +408,7 @@ gitment:
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
   count: true # Show comments count in post meta area
   lazy: true # Comments lazy loading with a button
-  cleanly: false # Hide 'Powered by ...' on footer, and more
+  cleanly: true # Hide 'Powered by ...' on footer, and more
   language: zh-Hans # Force language, or auto switch by theme
   github_user: Candlend # MUST HAVE, Your Github ID
   github_repo: candlend.github.io # MUST HAVE, The repo you use to store Gitment comments
