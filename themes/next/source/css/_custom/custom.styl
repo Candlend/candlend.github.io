@@ -1,1 +1,57 @@
 // Custom styles.
+/* 设置头像 */
+.site-author-image {
+    display: block;
+    margin: 15px auto;
+    border-radius: 50%;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s
+}
+.site-author-image:hover {
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.5);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,.5);
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    webkit-transform: rotate(360deg) scale(1.1);
+    moz-transform: rotate(360deg) scale(1.1);
+    ms-transform: rotate(360deg) scale(1.1);
+    -webkit-transform: rotate(360deg) scale(1.1);
+    -moz-transform: rotate(360deg) scale(1.1);
+    -ms-transform: rotate(360deg) scale(1.1);
+    -o-transform: rotate(360deg) scale(1.1);
+    transform: rotate(360deg) scale(1.1)
+}
+/* 设置头像end */
+
+// 自定义的文章摘要图片样式
+//图片外部的容器方框 
+.out-img-topic {
+  display: block;
+  // max-height:300px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+//图片
+img.img-topic {
+  display: block ;
+  margin-left: .7em;
+  margin-right: .7em;
+  padding: 0;
+  float: right;
+  clear: right;
+}
+// 自定义的文章置顶样式
+.post-sticky-flag {
+    font-size: inherit;
+    float: left;
+    color: rgb(0, 0, 0);
+    // cursor: help;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+.post-sticky-flag:hover {
+    color: #07b39b;
+}

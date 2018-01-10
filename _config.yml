@@ -5,7 +5,7 @@
 # Site
 title: Candle End's Blog
 subtitle: Code · Paint · Design
-description: 
+description: Nothing
 author: Candle End
 language: zh-Hans
 timezone: Asia/Shanghai
@@ -77,6 +77,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+plugins:
+  hexo-generate-feed
 theme: next
 
 # Deployment

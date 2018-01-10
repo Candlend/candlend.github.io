@@ -1,11 +1,24 @@
 ---
 title: Hello World
+sticky: 1
+image: "http://p2bh4l69u.bkt.clouddn.com/timg.jpg"
+# mathjax: true
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
+<!-- more -->
 ## Quick Start
 
 ### Create a new post
+
+$$
+\begin{eqnarray}
+\nabla\cdot\vec{E} &=& \frac{\rho}{\epsilon_0} \\
+\nabla\cdot\vec{B} &=& 0 \\
+\nabla\times\vec{E} &=& -\frac{\partial B}{\partial t} \\
+\nabla\times\vec{B} &=& \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)
+\end{eqnarray}
+$$
 
 ``` bash
 $ hexo new "My New Post"

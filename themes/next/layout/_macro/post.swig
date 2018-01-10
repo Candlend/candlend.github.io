@@ -300,6 +300,13 @@
           </div>
           <!--/noindex-->
         {% elif post.excerpt  %}
+           
+         {% if post.image %}
+         <div class="out-img-topic">
+           <img src={{ post.image }} class="img-topic" />
+         </div>
+         {% endif %}
+          
           {{ post.excerpt }}
           <!--noindex-->
           <div class="post-button text-center">

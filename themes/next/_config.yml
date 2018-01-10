@@ -40,7 +40,7 @@ keywords: "Code Paint Design"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: /atom.xml
 
 footer:
   # Specify the date when the site was setup.
@@ -114,8 +114,8 @@ menu_icons:
 # Schemes
 # scheme: Muse
 # scheme: Mist
-# scheme: Pisces
-scheme: Gemini
+scheme: Pisces
+# scheme: Gemini
 
 
 # ---------------------------------------------------------------
@@ -130,6 +130,8 @@ scheme: Gemini
 social:
   GitHub: https://github.com/Candlend || github
   E-Mail: mailto:huangchy@shanghaitech.edu.cn || envelope
+  Pixiv: https://pixiv.me/4507199 || paint-brush
+  Weibo: https://weibo.com/u/5150578140/home || weibo
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
@@ -195,7 +197,7 @@ sidebar:
   b2t: false
 
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
   # Enable sidebar on narrow view (only for Muse | Mist).
   onmobile: false
@@ -231,9 +233,9 @@ post_meta:
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: false
-  min2read: false
-  totalcount: false
+  wordcount: true
+  min2read: true
+  totalcount: true
   separated_meta: true
 
 # Wechat Subscriber
@@ -278,7 +280,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night eighties
 
 
 # ---------------------------------------------------------------
@@ -294,10 +296,10 @@ highlight_theme: normal
 # Arial | Tahoma | Helvetica | Times New Roman | Courier New | Verdana | Georgia | Palatino | Garamond | Comic Sans MS | Trebuchet MS
 # ---------------------------------------------------------------
 font:
-  enable: false
+  enable: true
 
   # Uri of fonts host. E.g. //fonts.googleapis.com (Default).
-  host:
+  host: //fonts.googleapis.com
 
   # Font options:
   # `external: true` will load this font family from `host` above.
@@ -307,33 +309,33 @@ font:
   # Global font settings used on <body> element.
   global:
     external: true
-    family: Lato
+    family:  #Lato
     size:
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6).
   # Fallback to `global` font settings.
   headings:
     external: true
-    family:
+    family: Roboto Slab
     size:
 
   # Font settings for posts.
   # Fallback to `global` font settings.
   posts:
     external: true
-    family:
+    family: 
 
   # Font settings for Logo.
   # Fallback to `global` font settings.
   logo:
     external: true
-    family:
+    family: Lobster Two
     size:
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family:
+    family: Roboto
     size:
 
 
@@ -354,7 +356,7 @@ han: false
 #swiftype_key:
 
 # Baidu Analytics ID
-#baidu_analytics:
+baidu_analytics: 39453549bb32d7fc3337e0c8767517e5
 
 
 
@@ -406,8 +408,8 @@ valine:
 gitment:
   enable: true
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
-  count: true # Show comments count in post meta area
-  lazy: true # Comments lazy loading with a button
+  count: false # Show comments count in post meta area
+  lazy: false # Comments lazy loading with a button
   cleanly: true # Hide 'Powered by ...' on footer, and more
   language: zh-Hans # Force language, or auto switch by theme
   github_user: Candlend # MUST HAVE, Your Github ID
@@ -421,8 +423,8 @@ gitment:
 # Available value:
 #    button | slide
 # Warning: Baidu Share does not support https.
-#baidushare:
-##  type: button
+# baidushare: true
+# type: button
 
 # Share
 # This plugin is more useful in China, make sure you known how to use it.
@@ -430,7 +432,7 @@ gitment:
 # Warning: JiaThis does not support https.
 #jiathis:
   ##uid: Get this uid from http://www.jiathis.com/
-#add_this_id:
+add_this_id: ra-5a55e453f86f6c73
 
 # Share
 #duoshuo_share: true
@@ -447,25 +449,25 @@ gitment:
 #           Technorati,Posterous,Tumblr,GoogleBookmarks,Newsvine,
 #           Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru
 needmoreshare2:
-  enable: false
+  enable: true
   postbottom:
     enable: false
     options:
       iconStyle: box
       boxForm: horizontal
-      position: bottomCenter
-      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook
+      position: topCenter
+      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Evernote
   float:
-    enable: false
+    enable: true
     options:
       iconStyle: box
       boxForm: horizontal
       position: middleRight
-      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook
+      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Evernote
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
-#google_site_verification:
+google_site_verification: GLenLSvOmQD2la52ZDrb0m-ziEqiprlGJGgaXf9SwhM
 
 # Google Analytics
 #google_analytics:
@@ -534,9 +536,9 @@ rating:
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
-  enable: false
-  app_id: #<app_id>
-  app_key: #<app_key>
+  enable: true
+  app_id: w0iLImm5MerYCdSa2fe2fHW6-gzGzoHsz #<app_id>
+  app_key: YoHORHe3X4wdvxnDq71aQf27 #<app_key>
 
 # Another tool to show number of visitors to each article.
 # visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
