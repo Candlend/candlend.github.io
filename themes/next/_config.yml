@@ -97,7 +97,8 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
-  # schedule: /schedule/ || calendar
+  schedule: /schedule/ || calendar
+  # gallery: /images/
   # sitemap: /sitemap.xml || sitemap
   # commonweal: /404/ || heartbeat
 
@@ -369,7 +370,7 @@ disqus:
 # Hypercomments
 #hypercomments_id:
 
-# changyan
+# changyanchangyan
 changyan:
   enable: false
   appid:
