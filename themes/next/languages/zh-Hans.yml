@@ -47,9 +47,9 @@ page:
   totally: 共有
   tags: 标签
 
-# footer:
-  # powered: "由 %s 强力驱动"
-  # theme: 主题
+footer:
+  powered: "Power by %s"
+  theme: "Theme"
 
 counter:
   tag_cloud:
