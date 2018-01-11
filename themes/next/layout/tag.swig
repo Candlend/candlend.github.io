@@ -19,7 +19,7 @@
         </{% if theme.seo %}h2{% else %}h1{% endif %}>
       </div>
 
-      {% for post in page.posts %}]
+      {% for post in page.posts %}
 
       {# Show year #}
       {% set year %}

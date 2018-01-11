@@ -3,7 +3,7 @@ date: 2016-07-06
 permalink: paint
 categories: paint
 type: "picture"
-tags: [Re:从零开始的异世界生活，雷姆]
+tags: [Re:从零开始的异世界生活,蕾姆]
 ---
 
 ## [Natsuki Rem](https://www.pixiv.net/member_illust.php?mode=medium&illust_id=57770339)

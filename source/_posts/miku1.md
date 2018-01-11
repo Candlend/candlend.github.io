@@ -3,7 +3,7 @@ date: 2017-08-31
 permalink: paint
 categories: paint
 type: "picture"
-tags: [Vocaloid，初音]
+tags: [Vocaloid,初音]
 ---
 
 ## [これからも続く歌](https://www.pixiv.net/member_illust.php?mode=medium&illust_id=64702596)

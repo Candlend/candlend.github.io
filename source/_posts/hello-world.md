@@ -3,8 +3,6 @@ title: Hello World
 date: 2018-01-09
 permalink: the_first_page
 sticky: 1
-categories: Hello World
-tags: [Hello World]
 # description: Hello!
 mathjax: true
 ---
