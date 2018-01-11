@@ -5,16 +5,15 @@ permalink: the_first_page
 sticky: 1
 categories: Hello World
 tags: [Hello World]
-image: http://p2bh4l69u.bkt.clouddn.com/timg.jpg
 # description: Hello!
-# mathjax: true
+mathjax: true
 ---
 
 
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
+{% fullimage http://p2bh4l69u.bkt.clouddn.com/timg.jpg, Hello World, Hello World %}
 <!-- more -->
-![Hello World](http://p2bh4l69u.bkt.clouddn.com/timg.jpg)
 ## Quick Start
 
 ### Create a new post
@@ -46,8 +45,6 @@ More info: [Deployment](https://hexo.io/docs/deployment.html)
 
 
 ## Test
-
-### 
 
 $$
 \begin{eqnarray}
@@ -100,8 +97,7 @@ More info:smile:: [Writing](https://hexo.io/docs/writing.html)
 <!-- endtab -->
 {% endtabs %}
 
-{% btn https://www.baidu.com, 点击下载百度, download fa-lg fa-fw %}
-<a class="btn" href="#"><i class="fa fa-home fa-5x"></i></a>
+
 
 basic footnote[^1]
 here is an inline footnote[^2](inline footnote)
