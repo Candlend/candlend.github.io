@@ -97,8 +97,8 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
+  gallery: /categories/paint || image
   # schedule: /schedule/ || calendar
-  # gallery: /images/
   # sitemap: /sitemap.xml || sitemap
   # commonweal: /404/ || heartbeat
 
