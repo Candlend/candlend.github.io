@@ -1,7 +1,7 @@
 ---
 date: 2017-07-18
 permalink: paint
-categories: paint
+categories: Paint
 type: "picture"
 tags: [Vocaloid,IA]
 ---

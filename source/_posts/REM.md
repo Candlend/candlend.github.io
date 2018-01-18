@@ -1,7 +1,7 @@
 ---
 date: 2016-07-06
 permalink: paint
-categories: paint
+categories: Paint
 type: "picture"
 tags: [Re:从零开始的异世界生活,蕾姆]
 ---

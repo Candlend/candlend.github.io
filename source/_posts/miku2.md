@@ -1,7 +1,7 @@
 ---
 date: 2017-08-31
 permalink: paint
-categories: paint
+categories: Paint
 type: "picture"
 tags: [Vocaloid,初音]
 ---
