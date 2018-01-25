@@ -214,7 +214,7 @@ scroll_to_more: true
 save_scroll: false
 
 # Automatically excerpt description in homepage as preamble text.
-excerpt_description: true
+excerpt_description: false
 
 # Automatically Excerpt. Not recommend.
 # Please use <!-- more --> in the post to control excerpt accurately.
@@ -470,7 +470,7 @@ needmoreshare2:
 google_site_verification: GLenLSvOmQD2la52ZDrb0m-ziEqiprlGJGgaXf9SwhM
 
 # Google Analytics
-#google_analytics:
+google_analytics: UA-112688190-1
 
 # Bing Webmaster tools verification setting
 # See: https://www.bing.com/webmaster/
@@ -577,8 +577,8 @@ busuanzi_count:
 
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
-baidu_push: false
-
+baidu_push: true
+baidu_site_verification: GoNbIGnThM
 # Google Calendar
 # Share your recent schedule to others via calendar page
 #
