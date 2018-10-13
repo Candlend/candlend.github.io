@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Unity初步学习：Space Shooter]]></title>
+    <url>%2F2018%2F01%2F25%2FspaceShooterDemo%2F</url>
+    <content type="text"><![CDATA[跟随Unity官方教学一步步做的小游戏，内容较基础，暂不做学习笔记。尝试将其添进blog，以后会进一步修改。 WSAD键或方向键移，鼠标左键或左Ctrl键射击。]]></content>
+      <categories>
+        <category>Game</category>
+      </categories>
+      <tags>
+        <tag>Game</tag>
+        <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[python爬虫实战学习笔记]]></title>
+    <url>%2F2018%2F01%2F18%2Fprabook_crawler%2F</url>
+    <content type="text"><![CDATA[目标网站：https://www.prabook.com目的：从表格中读取名字，抓取名字对应对应的人物相关信息，填入表格代码：https://github.com/Candlend/prabook_crawler 读取表格，获得人物名字表格形式有： 制表符分隔的TXT文件 逗号分隔的CSV文件 Excel表格 一开始本打算使用python的CSV库，后发觉两个问题： 我所要读取的表格本就是xlsx文件，虽然可以将其转换为CSV格式，但没有意义 人物信息会使用逗号，在使用逗号分割单元格的CSV文件中担心会产生问题（未证实） 最终我选择操作Excel读写，这里有3个第三方模块： xlrd xlwt xlutils xlrd只能读取xls和xlsx文件，xlwt只能生成并写入xls文件，不能在已有的excel文件基础上进行修改，而xlutils可以配合xlrd修改excel文件（保存时同名覆盖，未被修改的内容不变），但其弊端在于无法修改样式。我最终尝试了xlrd和xlutils，未使用xlwt库。 于此同时，所输入的命令行参数含义如下： 代表所要读取的excel文档 代表所要导出的excel文档（可覆盖原文档，但必须是旧版的xls格式，不然产生错误） 读取人物名字的起始编号 读取人物名字的结束编号 1/0代表严格模式的开启与否（严格模式开启则置信度低于下限的人物信息不写入表格） 置信度下限 1234567891011121314151617181920212223242526import xlrdfrom xlutils.copy import copyimport sysimport crawlerfor i in rangrdata = xlrd.open_workbook(sys.argv[1])wdata = copy(rdata)rtable = rdata.sheets()[0]wtable = wdata.get_sheet(0)nrows = rtable.nrowsstart = int(sys.argv[3])end = int(sys.argv[4])+1if sys.argv[5]: print ("use strict") strict = 1else: strict = 0path = sys.argv[2]limit = float(sys.argv[6])print ("range: %d~%d" % (int(sys.argv[3]),int(sys.argv[4])))print ('save position: ' + path) print ("the lower limit of reliability: ",limit)for i in range(start,end): name = rtable.row_values(i)[2] celebrity = crawler.crawl(name, i, strict, limit) #见下一章 输入名字，返回人物相关信息发起请求这次爬取网站我未考虑urllib库，一开始打算入门scrapy框架，但后来发现scrapy跟request相比上手较慢，且在初步了解requests后便想到了对策，从而可以很快达成我的目的，就转而使用了requests库。 然而，在发起请求时仍然出现了问题。我应当爬取的网址为：https://www.prabook.com/web/search.html#general=name爬虫所能访问的却是：https://www.prabook.com/web/search.html后面的信息无法发送。 事实上，后面的信息由页面的js读取然后发送了一个新的json请求给后端，实际搜索结果来自于：https://prabook.com/web/search.json?_dc=0&amp;start=0&amp;rows=10&amp;general=name 问号后面是高级搜索的各个参数值，这四个参数是必须的。_dc是毫秒级时间戳（一开始误以为是防爬随机字符串），其他参数的意义就显而易见了。 123url= "https://prabook.com/web/search.json"p=&#123;'general':name,'_dc':int(time.time()),'start':0,'rows':5&#125;r1=requests.get(url,params=p) 利用该json文件，我的目的是直接从中获取一部分人物信息和信息所在的主要页面的网址。 期间，还使用Levenshtein模块进行了筛选。Levenshtein距离，即编辑距离，意思是两个字符串之间，由一个转换成另一个所需的最少编辑操作次数。安装方法：pip install python-Levenshtein 我利用Levenshtein.ratio(a,b)获得表格中人物名字与搜索结果的相似度，以此作为搜索结果的置信度（有待改进）。 12345678910111213for eachresult in r1.json()['result']: eachname= eachresult["fullName"].replace("&lt;mark&gt;","").replace("&lt;/mark&gt;","") # print (eachname) eachreliability = Levenshtein.ratio(eachname.lower().replace('.',''),name.lower().replace('.','')) if eachreliability &gt; celebrity["reliability"]: celebrity["reliability"] = eachreliability j = eachresult celebrity['name'] = eachname print ('[%d] reliability: %.2f%%' % (number,celebrity["reliability"]*100)) if celebrity["reliability"] &lt; limit: print ("[%d] The reliability is too low!" % number) if strict == 1: return celebrity 分析页面结构我所使用的是Chrome的开发者模式，尽管我了解的仅有Elements标签页，但这次爬取网站已经足够。 对于Selectors选择器，这方面的知识一开始我还是从scrapy的官方教程中获得的，我选择了xpath而非css定位（只是单纯未尝试）。 在信息所在的主要页面，事实上人物信息格式是不统一的，所以筛选人物信息极其麻烦。 我在此使用了正则表达式（我使用的是regex第三方模块而非python自带的re模块，原因是re模块中，后行断言里只能是标准字符）。至于在分析页面结构时所遇到的各种问题，具体的就请直接看程序代码和网页源代码了。 但我在编码上遇到了两个问题（尽管我认为无论哪一个都是utf-8编码）： 从网站上获取文字信息时，原本的—会变成乱码â 当我使用print (json.dumps(celebrity,sort_keys=True, indent=4, separators=(&#39;,&#39;, &#39;: &#39;)))预览信息时，原本的—会变成unicode编码字符\u2014 我对于编码这块内容还不怎么熟悉，使用了治标不治本的蠢办法：python自带的replace方法。 爬虫隐藏在这一次的爬虫中，我没有特意地去隐藏自己的爬虫身份，如延时访问、动态代理、伪装浏览器等，原因如下： 访问速度本身就慢 代理服务器质量未必高 所要爬取的信息量不大 懒 如果在实际运用中被网站发现并被服务器屏蔽，我再做出相关对策。 Crawler主要代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108from lxml import etreeimport requestsimport timeimport jsonimport regex as reimport Levenshteindef crawl(name, number, strict, limit): # print(name) print ("[%d] Crawling..." % number) celebrity = &#123;'Education':'','Personality':'','Background':'','Birthday':'','Birthplace':'','Foreign':'','Career':'','Connections-Married':'', \ 'father':'','mother':'','spouse':'','how many children':'','children':'','name':'','reliability':0&#125; url= "https://prabook.com/web/search.json" p=&#123;'general':name,'_dc':int(time.time()),'start':0,'rows':5&#125; r1=requests.get(url,params=p) for eachresult in r1.json()['result']: eachname= eachresult["fullName"].replace("&lt;mark&gt;","").replace("&lt;/mark&gt;","") # print (eachname) eachreliability = Levenshtein.ratio(eachname.lower().replace('.',''),name.lower().replace('.','')) if eachreliability &gt; celebrity["reliability"]: celebrity["reliability"] = eachreliability j = eachresult celebrity['name'] = eachname print ('[%d] reliability: %.2f%%' % (number,celebrity["reliability"]*100)) if celebrity["reliability"] &lt; limit: print ("[%d] The reliability is too low!" % number) if strict == 1: return celebrity celebrity['Background']=j["staticBackground"] celebrity['Birthday']="%d/%d/%d" % (j["birthYear"],j["birthMonth"],j["birthDay"]) celebrity['Birthplace']=j["birthPlace"] try: if j["nationalities"][0] == "American": celebrity['Foreign'] = 'N' else: celebrity['Foreign'] = 'Y' except IndexError: pass path="https://prabook.com/web" + j["seoUrl"] r2=requests.get(path) html = r2.text.encode("utf-8") tree = etree.HTML(html) links = tree.xpath('//article[@class="article__item"]') if len(links) == 0: # print ("no article") return celebrity try: Interests=tree.xpath('//p[@class="interest-list__element"]/text()')[0] celebrity["Personality"]=Interests.replace("\r","").replace("\n","").replace("\t","").replace("â","—") except: # print ("no interest") pass for eachlink in links: title1 = eachlink.xpath('h3[@class="article__title"]/text()')[0].replace("\r","").replace("\n","").replace("\t","") if title1 == "Education" or title1 == "Career" or title1 == "Background": text = eachlink.xpath('p[@class="article__text"]/text()')[0].replace("\r","").replace("\n","").replace("\t","").replace("â","—") if celebrity[title1] == '': celebrity[title1]=text if title1 == "Connections": try: text = eachlink.xpath('p[@class="article__text"]/text()')[0].replace("\r","").replace("\n","").replace("\t","").replace("â","—") married = re.findall(r'(?&lt;=Married[^\d:;]+?, )[^.]*(?=.)',text) if len(married) == 1: celebrity["Connections-Married"] = married[0] # else: # print ("something wrong %d" % len(married)) except IndexError: # print ("He has no wife.") pass links2 = eachlink.xpath('dl[@class="def-list"]') for eachlink2 in links2: try: title2 = eachlink2.xpath('dt[@class="def-list__title"]/text()')[0].replace("\r","").replace("\n","").replace("\t","") except IndexError: # print ("no title") pass if title2 == "father:" or title2 == "mother:" or title2 == "spouse:" or title2 == "children:" or title2 == "spouses:": text = eachlink2.xpath('dd[@class="def-list__text"]/text()')[0].replace("\r","").replace("\n","").replace("\t","").replace("â","—").strip() if title2 == "spouses:": if celebrity["spouse"] == "": celebrity["spouse"] = text else: celebrity["spouse"] += "; " + text else: if celebrity[title2[:-1]] == "": celebrity[title2[:-1]] = text else: celebrity[title2[:-1]] += "; " + text # print (text) if title2 == "children:": if celebrity["how many children"] == "": celebrity["how many children"] = 1 else: celebrity["how many children"] += 1 else: continue print ("[%d] Get!" % number) return (celebrity)if __name__ == '__main__': name = input('name: ') strict = input('strict: ') limit = input('limit: ') celebrity = crawl(name, 0, strict, limit) print (json.dumps(celebrity,sort_keys=True, indent=4, separators=(',', ': '))) 将人物相关信息填入表格这一步没有什么好说明的，代码如下： 1234567891011121314151617wtable.write(i,6,celebrity['Background'])wtable.write(i,7,celebrity['Birthday'])wtable.write(i,8,celebrity['Birthplace'])wtable.write(i,9,celebrity['Foreign'])wtable.write(i,10,celebrity['Education'])wtable.write(i,11,celebrity['Career'])wtable.write(i,12,celebrity['Personality'])wtable.write(i,13,celebrity['Connections-Married'])wtable.write(i,14,celebrity['father'])wtable.write(i,15,celebrity['mother'])wtable.write(i,16,celebrity['spouse'])wtable.write(i,17,celebrity['how many children'])wtable.write(i,18,celebrity['children'])wtable.write(i,35,"%.2f%%" % (celebrity["reliability"]*100))wtable.write(i,36,name)wtable.write(i,37,celebrity['name'])wdata.save(path) 使用多线程加快爬取速度由于网络爬虫多是I/O密集型代码，加上我所爬取的网站更是国外网站，访问速度极慢，我出于这一考虑使用了multiprocessing.dummy的多线程，而不是对CPU密集型代码友好的多进程（虽然经常听说Python 的多线程是鸡肋）。 然而网上许多网络爬虫的例子中，仍然使用了multiprocessing的多进程，我没有深入研究，尚不明其原因。 1234567from multiprocessing.dummy import Pooldef process(i): passpool = Pool(processes=4)pool.map(process,range(start,end)) 将程序打包成可执行文件一开始我试图使用pyinstaller在Linux上打包成Windows的exe后缀文件，当然是没有成功的，可执行文件需要在对应平台生成。但似乎可以使用wine来达成这个效果，未尝试。 于是我将代码转到windows上，并安装各种依赖，遇到了很多问题，主要是： 安装Levenshtein库时提示Microsoft Visual C++ 14.0 is required，照提示安装完Microsoft Visual C++ 14.0之后，仍出现问题（未截屏，难以说明），后google得知要移动某一文件的位置，最终解决了问题。 使用pyinstaller直接打包产生问题 12Error loading Python DLL 'C:\Users\Candlend\Desktop\prabook_crawler\build\test\python36.dll'LoadLibrary: 找不到指定的模块 后将C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\python36.dll移动到该位置后，打包测试用的hello_world.exe正常运行，然而prabook_crawler的可执行文件仍然报错，但报错信息变为No module named &#39;_socket&#39;。但我的python并没有缺少这一模块，不明其原因。最后使用pyinstaller -F指令生成单个可执行文件，没有产生问题。 总结第一次尝试写网络爬虫，就结果而言，目的达成，但程序仍有许多不足之处，这篇博客中也有很多不准确的说法。目前很多东西还是本着不求甚解的态度，没有去深入研究。但我先将所遇到的问题记录下来，一方面是希望获得指点，解答我的疑问，一方面是想在以后的学习中，结合新遇到的问题一起系统地研究，之后完善这篇博客。 执行效果如图：]]></content>
+      <categories>
+        <category>Note</category>
+      </categories>
+      <tags>
+        <tag>爬虫</tag>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[生命的杰作]]></title>
+    <url>%2F2018%2F01%2F11%2FMasterpiece_of_Life%2F</url>
+    <content type="text"><![CDATA[在隔壁简陋的画室里住着一位老画家，在我18岁那年，我与他交换了生命。 不知是什么时候开始的，也可能是出生以来，我就有一种能力，隐隐约约间，我可以感受到他人的临终之际是在什么时候，是因何而死。也隐隐约约间注意到了，我有能力改变他人的死期，代价不过是自己的生命而已。在我18年的岁月中，我一直没有机会使出这项能力，身边少数的亲人、友人，要么值得庆幸的有着长久的生命，要么是我当时还没有奉献自我的勇气，要么是在我察觉到自己的特殊能力之前，就永远地失去了交易的资本。 第一次见到他的时候，他年老的身体和有神的面容的强烈反差引起了我的注意。他的左臂残废枯瘦，手腕蜷曲，好像一只鸟爪。他屏息凝视着铺在墙上的空白画纸，随后拿起画笔一挥而就。纸张与指尖的温度仿佛融在一起了,手中的画笔在橘色暖光中挥舞。他抿着嘴，眉眼里尽是认真，仿佛这一刻，他的一切就在这画板上。 后来，当时还就读于初中的我每次无事可干的时候，在外面惹了祸不敢回家的时候，被醉酒的父亲赶出家门的时候，都来到这里，什么也不做，只是透过残破的窗户直勾勾地盯着他画画的样子。 老画家渐渐注意到了我，露出僵硬的、满脸褶子的笑容，将画笔轻轻地放入了凳子边的半桶清水之中，微微颤抖的左臂伸向了我所在的窗边，想邀请我进来，殊不知这番只会把小孩子吓跑。我还是走了进去。尽管一开始气氛尴尬，但年代的差异并没有影响到我们之间的交流。我们相处得很愉快，相互之间无话不谈。我逝世的母亲也好，整天无所事事失去了灵魂一般的父亲也罢，这些事情，他都一一认真地听着。他也坦白告诉我，他不善于肖像画的短处，他过去的失败与错误，他振作起来重新做人的愿望，以及，有一幅画有生之年一定要画完的执念。 就这样持续了很多年。 在我18岁的一天下午，我一如既往地待在他的画室看他画画。突然，没有征兆的，他告诉我他得了帕金森氏病。谈到这一点时，他语气轻松随意，就像不过是昨天刚患上了小感冒一样。而我只是嗯了一声。其实我一直都知道，自我第一次从画室的窗口瞄向他的时候就知道了，老画家的生命还剩下2年，但直到这一天，我才算是知道真正的原因。他没有对我冷漠的反应感到惊讶，就像我没有对他的陈述感到惊讶一样。他接着轻描淡写地询问我，能否继承他这间简陋的画室，而我也拒绝了，他便不再说话。 很久以前，我就对这个世界产生了质疑。为什么对生活还怀有热情的人马上就要死去？为什么没有生存欲望的我依旧要在世上苟延残喘？ 然后我全部告诉他了，可以看到他人死期的事，可以交换生命的事，还有试图拯救他人却失败的经历，以及40岁的我将穷困潦倒而死一事。他刚开始感到很惊讶，但不愧是画家，他全部相信了。 我提议与他交换生命，尽管只有22年，尽管无法改变悲惨的22年，但足以让他实现梦想了。一开始，老画家不发一言，后转而问我，他能不能反悔，我自然是点了点头。 交换之后，我们都先熟悉了一下新的身体。老画家的这副身体虽然年迈，但却有力，暂且一点都看不出身患绝症的样子。如我所料的是，我失去了特殊能力。而他，活蹦乱跳的样子，看了看我，再看了看自己，突然笑了，笑得很开心，笑得像个孩子。当然，他没有反悔，他什么也没说。 我也像个大人一样叮嘱他，例行公事一般，告诉了他我平时的生活习惯，希望他平稳地过好大学生活，学业成绩也不要太不堪入目……这些他都一一点头答应了。唯独当我委托他照顾好我的父亲时，他却沉默了。我不怪他，毕竟我的父亲与他本就从未有过交集，他没有义务去照顾一个年龄上都不足以做他儿子的陌生人。但我也相信，他自有分寸。 第二天，我便离开了，打算好好过我最后的两年。走之前，他把他的所有财产、所有画都给了我，作为这份生命的谢礼，我坦然地接受了。我卖了他以前的一些作品，意外地卖出了好价钱。用这些钱，我在世界各地旅行，在偏远的山村赞助一个小学校，开一家属于自己的小店……干了许多过去从未做过、从未想过的事情。生命中的最后两年，想不到竟是我一生中最快乐的时光。 两年过去了。 两年后，我依然活着。 这是我20年的生命以来，少数令我感到震惊的事情。我甚至去找了这两年都没有去看的医生。他告诉我，我的大脑完全没有帕金森氏病的征兆，就如同20岁年轻人的大脑一般，我甚至还可以活个几十年，这是医学史上的奇迹。我这才回忆起来，这两年间，我从未感受过帕金森氏病的痛苦，那鸟爪一般的左臂也从未颤抖过。我这才意识到，我们那次生命的交换，已经改变了双方的命运。 为了告诉他这个喜讯，我少有地满怀兴致地回到了那里，我们第一次认识的那间画室——如今已经成了一家便利店，而边上的平房里也不再是以前的那家人了。四处打听才知道，他们已经搬家了。后来又花了很多工夫，历经3年，我终于才有了他们的音信。然而时运不济，23岁的年轻人死去了，听说是车祸。我找到他们的那一天，正值葬礼。 我出席了葬礼，意外的有很多人，有我过去就认识的人们，也有他在5年间获得的好友。父亲也与以前不同了，在殡仪馆里，他抱着儿子的遗像不停地哭，一点都不像个大人。那幅遗像是我18岁那年我们还没交换生命时的照片，是一张没有表情的、不讨喜的脸。 葬礼过后，我前去拜访他们的新家。父亲知道自己的儿子一直与一位老画家交好，便允许我进去。在他的房间里，我看到了一幅画，是一副笑得很开心的小男孩的肖像画。 是我。]]></content>
+      <categories>
+        <category>Novel</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F01%2F09%2Fthe_first_page%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new postRun server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment Test \begin{eqnarray} \nabla\cdot\vec{E} &=& \frac{\rho}{\epsilon_0} \\ \nabla\cdot\vec{B} &=& 0 \\ \nabla\times\vec{E} &=& -\frac{\partial B}{\partial t} \\ \nabla\times\vec{B} &=& \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right) \end{eqnarray}1$ hexo new "My New Post" More info: Writing hh12- hh+ hh 人生乃是一面镜子，从镜子里认识自己，我要称之为头等大事，也只是我们追求的目的！ 下载 下载变大 33% 下载两倍大 default primary success success warning danger danger no-icon default 选项卡 1选项卡 2选项卡 3这是选项卡 1 呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈…… 这是选项卡 2 这是选项卡 3 哇，你找到我了！φ(≧ω≦*)♪～ basic footnote1 here is an inline footnote2 and another one3 and another one4 footnote content --- 1.basic footnote content ↩2.inline footnote ↩3.paragraph ↩4.footnote content with some markdown ↩]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2017%2F08%2F31%2Fpaint%2F</url>
+    <content type="text"><![CDATA[これからも続く歌]]></content>
+      <categories>
+        <category>Paint</category>
+      </categories>
+      <tags>
+        <tag>Vocaloid</tag>
+        <tag>初音</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2017%2F08%2F31%2Fpaint%2F</url>
+    <content type="text"><![CDATA[雪姫は銀河の夢を見るか]]></content>
+      <categories>
+        <category>Paint</category>
+      </categories>
+      <tags>
+        <tag>Vocaloid</tag>
+        <tag>初音</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2017%2F07%2F18%2Fpaint%2F</url>
+    <content type="text"><![CDATA[IA]]></content>
+      <categories>
+        <category>Paint</category>
+      </categories>
+      <tags>
+        <tag>Vocaloid</tag>
+        <tag>IA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2016%2F07%2F24%2Fpaint%2F</url>
+    <content type="text"><![CDATA[さようなら]]></content>
+      <categories>
+        <category>Paint</category>
+      </categories>
+      <tags>
+        <tag>弹丸论破</tag>
+        <tag>朝日奈葵</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2016%2F07%2F06%2Fpaint%2F</url>
+    <content type="text"><![CDATA[Natsuki Rem]]></content>
+      <categories>
+        <category>Paint</category>
+      </categories>
+      <tags>
+        <tag>Re:从零开始的异世界生活</tag>
+        <tag>蕾姆</tag>
+      </tags>
+  </entry>
+</search>

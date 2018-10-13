@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="GLenLSvOmQD2la52ZDrb0m-ziEqiprlGJGgaXf9SwhM" />
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="GoNbIGnThM" />
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto Slab:300,300italic,400,400italic,700,700italicLobster Two:300,300italic,400,400italic,700,700italicRoboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="爬虫,学习笔记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Candle End's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="目标网站：https://www.prabook.com目的：从表格中读取名字，抓取名字对应对应的人物相关信息，填入表格代码：https://github.com/Candlend/prabook_crawler">
+<meta name="keywords" content="爬虫,学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python爬虫实战学习笔记">
+<meta property="og:url" content="http://candlend.cn/2018/01/18/prabook_crawler/index.html">
+<meta property="og:site_name" content="Candle End&#39;s Blog">
+<meta property="og:description" content="目标网站：https://www.prabook.com目的：从表格中读取名字，抓取名字对应对应的人物相关信息，填入表格代码：https://github.com/Candlend/prabook_crawler">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p2bh4l69u.bkt.clouddn.com/prabook_crawler/mindmap.png">
+<meta property="og:image" content="http://p2bh4l69u.bkt.clouddn.com/prabook_crawler/result.png">
+<meta property="og:updated_time" content="2018-07-02T13:19:46.835Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python爬虫实战学习笔记">
+<meta name="twitter:description" content="目标网站：https://www.prabook.com目的：从表格中读取名字，抓取名字对应对应的人物相关信息，填入表格代码：https://github.com/Candlend/prabook_crawler">
+<meta name="twitter:image" content="http://p2bh4l69u.bkt.clouddn.com/prabook_crawler/mindmap.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://candlend.cn/2018/01/18/prabook_crawler/"/>
+
+
+
+
+
+  <title>python爬虫实战学习笔记 | Candle End's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-112688190-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?39453549bb32d7fc3337e0c8767517e5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Candle End's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Code · Paint · Design</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-gallery">
+          <a href="/categories/paint" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-image"></i> <br />
+            
+            画廊
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://candlend.cn/2018/01/18/prabook_crawler/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Candle End">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://p2bh4l69u.bkt.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Candle End's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python爬虫实战学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T12:15:06+08:00">
+                2018-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/18/prabook_crawler/" class="leancloud_visitors" data-flag-title="python爬虫实战学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,788
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="\assets\js\APlayer.min.js"> </script><p>目标网站：<a href="https://www.prabook.com" target="_blank" rel="noopener">https://www.prabook.com</a><br>目的：从表格中读取名字，抓取名字对应对应的人物相关信息，填入表格<br>代码：<a href="https://github.com/Candlend/prabook_crawler" target="_blank" rel="noopener">https://github.com/Candlend/prabook_crawler</a><br><img src="http://p2bh4l69u.bkt.clouddn.com/prabook_crawler/mindmap.png" alt="思维导图"></p>
+<a id="more"></a>
+<h2 id="读取表格，获得人物名字"><a href="#读取表格，获得人物名字" class="headerlink" title="读取表格，获得人物名字"></a>读取表格，获得人物名字</h2><p>表格形式有：</p>
+<ol>
+<li>制表符分隔的TXT文件</li>
+<li>逗号分隔的CSV文件</li>
+<li>Excel表格</li>
+</ol>
+<p>一开始本打算使用python的CSV库，后发觉两个问题：</p>
+<ol>
+<li>我所要读取的表格本就是xlsx文件，虽然可以将其转换为CSV格式，但没有意义</li>
+<li>人物信息会使用逗号，在使用逗号分割单元格的CSV文件中担心会产生问题（未证实）</li>
+</ol>
+<p>最终我选择操作Excel读写，这里有3个第三方模块：</p>
+<ol>
+<li>xlrd</li>
+<li>xlwt</li>
+<li>xlutils</li>
+</ol>
+<p>xlrd只能读取xls和xlsx文件，xlwt只能生成并写入xls文件，不能在已有的excel文件基础上进行修改，而xlutils可以配合xlrd修改excel文件（保存时同名覆盖，未被修改的内容不变），但其弊端在于无法修改样式。我最终尝试了xlrd和xlutils，未使用xlwt库。</p>
+<p>于此同时，所输入的命令行参数含义如下：</p>
+<ol>
+<li>代表所要读取的excel文档</li>
+<li>代表所要导出的excel文档（可覆盖原文档，但必须是旧版的xls格式，不然产生错误）</li>
+<li>读取人物名字的起始编号</li>
+<li>读取人物名字的结束编号</li>
+<li>1/0代表严格模式的开启与否（严格模式开启则置信度低于下限的人物信息不写入表格）</li>
+<li>置信度下限</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd</span><br><span class="line"><span class="keyword">from</span> xlutils.copy <span class="keyword">import</span> copy</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> crawler</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> rang</span><br><span class="line">rdata = xlrd.open_workbook(sys.argv[<span class="number">1</span>])</span><br><span class="line">wdata = copy(rdata)</span><br><span class="line">rtable = rdata.sheets()[<span class="number">0</span>]</span><br><span class="line">wtable = wdata.get_sheet(<span class="number">0</span>)</span><br><span class="line">nrows = rtable.nrows</span><br><span class="line">start = int(sys.argv[<span class="number">3</span>])</span><br><span class="line">end = int(sys.argv[<span class="number">4</span>])+<span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> sys.argv[<span class="number">5</span>]:</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"use strict"</span>)</span><br><span class="line">    strict = <span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    strict = <span class="number">0</span></span><br><span class="line">path = sys.argv[<span class="number">2</span>]</span><br><span class="line">limit = float(sys.argv[<span class="number">6</span>])</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"range: %d~%d"</span> % (int(sys.argv[<span class="number">3</span>]),int(sys.argv[<span class="number">4</span>])))</span><br><span class="line"><span class="keyword">print</span> (<span class="string">'save position: '</span> + path) </span><br><span class="line"><span class="keyword">print</span> (<span class="string">"the lower limit of reliability: "</span>,limit)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(start,end):</span><br><span class="line">	name = rtable.row_values(i)[<span class="number">2</span>]</span><br><span class="line">	celebrity = crawler.crawl(name, i, strict, limit) <span class="comment">#见下一章</span></span><br></pre></td></tr></table></figure>
+<h2 id="输入名字，返回人物相关信息"><a href="#输入名字，返回人物相关信息" class="headerlink" title="输入名字，返回人物相关信息"></a>输入名字，返回人物相关信息</h2><h3 id="发起请求"><a href="#发起请求" class="headerlink" title="发起请求"></a>发起请求</h3><p>这次爬取网站我未考虑urllib库，一开始打算入门scrapy框架，但后来发现scrapy跟request相比上手较慢，且在初步了解requests后便想到了对策，从而可以很快达成我的目的，就转而使用了requests库。</p>
+<p>然而，在发起请求时仍然出现了问题。我应当爬取的网址为：<br><a href="https://www.prabook.com/web/search.html#general=name" target="_blank" rel="noopener">https://www.prabook.com/web/search.html#general=name</a><br>爬虫所能访问的却是：<br><a href="https://www.prabook.com/web/search.html" target="_blank" rel="noopener">https://www.prabook.com/web/search.html</a><br>后面的信息无法发送。</p>
+<p>事实上，后面的信息由页面的js读取然后发送了一个新的json请求给后端，实际搜索结果来自于：<br><a href="https://prabook.com/web/search.json?_dc=0&amp;start=0&amp;rows=10&amp;general=name" target="_blank" rel="noopener">https://prabook.com/web/search.json?_dc=0&amp;start=0&amp;rows=10&amp;general=name</a></p>
+<p>问号后面是高级搜索的各个参数值，这四个参数是必须的。_dc是毫秒级时间戳（一开始误以为是防爬随机字符串），其他参数的意义就显而易见了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url= <span class="string">"https://prabook.com/web/search.json"</span></span><br><span class="line">p=&#123;<span class="string">'general'</span>:name,<span class="string">'_dc'</span>:int(time.time()),<span class="string">'start'</span>:<span class="number">0</span>,<span class="string">'rows'</span>:<span class="number">5</span>&#125;</span><br><span class="line">r1=requests.get(url,params=p)</span><br></pre></td></tr></table></figure>
+<p>利用该json文件，我的目的是直接从中获取一部分人物信息和信息所在的主要页面的网址。</p>
+<p>期间，还使用Levenshtein模块进行了筛选。Levenshtein距离，即编辑距离，意思是两个字符串之间，由一个转换成另一个所需的最少编辑操作次数。安装方法：<code>pip install python-Levenshtein</code></p>
+<p>我利用<code>Levenshtein.ratio(a,b)</code>获得表格中人物名字与搜索结果的相似度，以此作为搜索结果的置信度（有待改进）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> eachresult <span class="keyword">in</span> r1.json()[<span class="string">'result'</span>]:</span><br><span class="line">    eachname= eachresult[<span class="string">"fullName"</span>].replace(<span class="string">"&lt;mark&gt;"</span>,<span class="string">""</span>).replace(<span class="string">"&lt;/mark&gt;"</span>,<span class="string">""</span>)</span><br><span class="line">    <span class="comment"># print (eachname)</span></span><br><span class="line">    eachreliability = Levenshtein.ratio(eachname.lower().replace(<span class="string">'.'</span>,<span class="string">''</span>),name.lower().replace(<span class="string">'.'</span>,<span class="string">''</span>))</span><br><span class="line">    <span class="keyword">if</span> eachreliability &gt; celebrity[<span class="string">"reliability"</span>]:</span><br><span class="line">        celebrity[<span class="string">"reliability"</span>] = eachreliability</span><br><span class="line">        j = eachresult</span><br><span class="line">        celebrity[<span class="string">'name'</span>] = eachname</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">'[%d] reliability: %.2f%%'</span> % (number,celebrity[<span class="string">"reliability"</span>]*<span class="number">100</span>))</span><br><span class="line">        <span class="keyword">if</span>  celebrity[<span class="string">"reliability"</span>] &lt; limit:</span><br><span class="line">            <span class="keyword">print</span> (<span class="string">"[%d] The reliability is too low!"</span> % number)</span><br><span class="line">            <span class="keyword">if</span> strict == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> celebrity</span><br></pre></td></tr></table></figure>
+<h3 id="分析页面结构"><a href="#分析页面结构" class="headerlink" title="分析页面结构"></a>分析页面结构</h3><p>我所使用的是Chrome的开发者模式，尽管我了解的仅有Elements标签页，但这次爬取网站已经足够。</p>
+<p>对于Selectors选择器，这方面的知识一开始我还是从scrapy的官方教程中获得的，我选择了xpath而非css定位（只是单纯未尝试）。</p>
+<p>在信息所在的主要页面，事实上人物信息格式是不统一的，所以筛选人物信息极其麻烦。</p>
+<p>我在此使用了正则表达式（我使用的是regex第三方模块而非python自带的re模块，原因是re模块中，后行断言里只能是标准字符）。至于在分析页面结构时所遇到的各种问题，具体的就请直接看程序代码和网页源代码了。</p>
+<p>但我在编码上遇到了两个问题（尽管我认为无论哪一个都是utf-8编码）：</p>
+<ol>
+<li>从网站上获取文字信息时，原本的<code>—</code>会变成乱码<code>â</code></li>
+<li>当我使用<code>print (json.dumps(celebrity,sort_keys=True, indent=4, separators=(&#39;,&#39;, &#39;: &#39;)))</code>预览信息时，原本的<code>—</code>会变成unicode编码字符<code>\u2014</code></li>
+</ol>
+<p>我对于编码这块内容还不怎么熟悉，使用了治标不治本的蠢办法：python自带的<code>replace</code>方法。</p>
+<h3 id="爬虫隐藏"><a href="#爬虫隐藏" class="headerlink" title="爬虫隐藏"></a>爬虫隐藏</h3><p>在这一次的爬虫中，我没有特意地去隐藏自己的爬虫身份，如延时访问、动态代理、伪装浏览器等，原因如下：</p>
+<ol>
+<li>访问速度本身就慢</li>
+<li>代理服务器质量未必高</li>
+<li>所要爬取的信息量不大</li>
+<li>懒</li>
+</ol>
+<p>如果在实际运用中被网站发现并被服务器屏蔽，我再做出相关对策。</p>
+<h3 id="Crawler主要代码"><a href="#Crawler主要代码" class="headerlink" title="Crawler主要代码"></a>Crawler主要代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> regex <span class="keyword">as</span> re</span><br><span class="line"><span class="keyword">import</span> Levenshtein</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">crawl</span><span class="params">(name, number, strict, limit)</span>:</span></span><br><span class="line">    <span class="comment"># print(name)</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"[%d] Crawling..."</span> % number)</span><br><span class="line">    celebrity = &#123;<span class="string">'Education'</span>:<span class="string">''</span>,<span class="string">'Personality'</span>:<span class="string">''</span>,<span class="string">'Background'</span>:<span class="string">''</span>,<span class="string">'Birthday'</span>:<span class="string">''</span>,<span class="string">'Birthplace'</span>:<span class="string">''</span>,<span class="string">'Foreign'</span>:<span class="string">''</span>,<span class="string">'Career'</span>:<span class="string">''</span>,<span class="string">'Connections-Married'</span>:<span class="string">''</span>, \</span><br><span class="line">    <span class="string">'father'</span>:<span class="string">''</span>,<span class="string">'mother'</span>:<span class="string">''</span>,<span class="string">'spouse'</span>:<span class="string">''</span>,<span class="string">'how many children'</span>:<span class="string">''</span>,<span class="string">'children'</span>:<span class="string">''</span>,<span class="string">'name'</span>:<span class="string">''</span>,<span class="string">'reliability'</span>:<span class="number">0</span>&#125;</span><br><span class="line">    url= <span class="string">"https://prabook.com/web/search.json"</span></span><br><span class="line">    p=&#123;<span class="string">'general'</span>:name,<span class="string">'_dc'</span>:int(time.time()),<span class="string">'start'</span>:<span class="number">0</span>,<span class="string">'rows'</span>:<span class="number">5</span>&#125;</span><br><span class="line">    r1=requests.get(url,params=p)</span><br><span class="line">    <span class="keyword">for</span> eachresult <span class="keyword">in</span> r1.json()[<span class="string">'result'</span>]:</span><br><span class="line">        eachname= eachresult[<span class="string">"fullName"</span>].replace(<span class="string">"&lt;mark&gt;"</span>,<span class="string">""</span>).replace(<span class="string">"&lt;/mark&gt;"</span>,<span class="string">""</span>)</span><br><span class="line">        <span class="comment"># print (eachname)</span></span><br><span class="line">        eachreliability = Levenshtein.ratio(eachname.lower().replace(<span class="string">'.'</span>,<span class="string">''</span>),name.lower().replace(<span class="string">'.'</span>,<span class="string">''</span>))</span><br><span class="line">        <span class="keyword">if</span> eachreliability &gt; celebrity[<span class="string">"reliability"</span>]:</span><br><span class="line">            celebrity[<span class="string">"reliability"</span>] = eachreliability</span><br><span class="line">            j = eachresult</span><br><span class="line">            celebrity[<span class="string">'name'</span>] = eachname</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">'[%d] reliability: %.2f%%'</span> % (number,celebrity[<span class="string">"reliability"</span>]*<span class="number">100</span>))</span><br><span class="line">    <span class="keyword">if</span>  celebrity[<span class="string">"reliability"</span>] &lt; limit:</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">"[%d] The reliability is too low!"</span> % number)</span><br><span class="line">        <span class="keyword">if</span> strict == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> celebrity</span><br><span class="line">    celebrity[<span class="string">'Background'</span>]=j[<span class="string">"staticBackground"</span>]</span><br><span class="line">    celebrity[<span class="string">'Birthday'</span>]=<span class="string">"%d/%d/%d"</span> % (j[<span class="string">"birthYear"</span>],j[<span class="string">"birthMonth"</span>],j[<span class="string">"birthDay"</span>])</span><br><span class="line">    celebrity[<span class="string">'Birthplace'</span>]=j[<span class="string">"birthPlace"</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> j[<span class="string">"nationalities"</span>][<span class="number">0</span>] == <span class="string">"American"</span>:</span><br><span class="line">            celebrity[<span class="string">'Foreign'</span>] = <span class="string">'N'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            celebrity[<span class="string">'Foreign'</span>] = <span class="string">'Y'</span></span><br><span class="line">    <span class="keyword">except</span> IndexError:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    path=<span class="string">"https://prabook.com/web"</span> + j[<span class="string">"seoUrl"</span>]</span><br><span class="line">    r2=requests.get(path)</span><br><span class="line">    html = r2.text.encode(<span class="string">"utf-8"</span>)</span><br><span class="line">    tree = etree.HTML(html)</span><br><span class="line">    links = tree.xpath(<span class="string">'//article[@class="article__item"]'</span>)</span><br><span class="line">    <span class="keyword">if</span> len(links) == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># print ("no article")</span></span><br><span class="line">        <span class="keyword">return</span> celebrity</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        Interests=tree.xpath(<span class="string">'//p[@class="interest-list__element"]/text()'</span>)[<span class="number">0</span>]</span><br><span class="line">        celebrity[<span class="string">"Personality"</span>]=Interests.replace(<span class="string">"\r"</span>,<span class="string">""</span>).replace(<span class="string">"\n"</span>,<span class="string">""</span>).replace(<span class="string">"\t"</span>,<span class="string">""</span>).replace(<span class="string">"â"</span>,<span class="string">"—"</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment"># print ("no interest")</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">for</span> eachlink <span class="keyword">in</span> links:</span><br><span class="line">        title1 = eachlink.xpath(<span class="string">'h3[@class="article__title"]/text()'</span>)[<span class="number">0</span>].replace(<span class="string">"\r"</span>,<span class="string">""</span>).replace(<span class="string">"\n"</span>,<span class="string">""</span>).replace(<span class="string">"\t"</span>,<span class="string">""</span>)</span><br><span class="line">        <span class="keyword">if</span> title1 == <span class="string">"Education"</span> <span class="keyword">or</span> title1 == <span class="string">"Career"</span> <span class="keyword">or</span> title1 == <span class="string">"Background"</span>:</span><br><span class="line">            text = eachlink.xpath(<span class="string">'p[@class="article__text"]/text()'</span>)[<span class="number">0</span>].replace(<span class="string">"\r"</span>,<span class="string">""</span>).replace(<span class="string">"\n"</span>,<span class="string">""</span>).replace(<span class="string">"\t"</span>,<span class="string">""</span>).replace(<span class="string">"â"</span>,<span class="string">"—"</span>)</span><br><span class="line">            <span class="keyword">if</span> celebrity[title1] == <span class="string">''</span>:</span><br><span class="line">                celebrity[title1]=text</span><br><span class="line">        <span class="keyword">if</span> title1 == <span class="string">"Connections"</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                text = eachlink.xpath(<span class="string">'p[@class="article__text"]/text()'</span>)[<span class="number">0</span>].replace(<span class="string">"\r"</span>,<span class="string">""</span>).replace(<span class="string">"\n"</span>,<span class="string">""</span>).replace(<span class="string">"\t"</span>,<span class="string">""</span>).replace(<span class="string">"â"</span>,<span class="string">"—"</span>)</span><br><span class="line">                married = re.findall(<span class="string">r'(?&lt;=Married[^\d:;]+?, )[^.]*(?=.)'</span>,text)</span><br><span class="line">                <span class="keyword">if</span> len(married) == <span class="number">1</span>:</span><br><span class="line">                    celebrity[<span class="string">"Connections-Married"</span>] = married[<span class="number">0</span>]</span><br><span class="line">                <span class="comment"># else:</span></span><br><span class="line">                    <span class="comment"># print ("something wrong %d" % len(married))</span></span><br><span class="line">            <span class="keyword">except</span> IndexError:</span><br><span class="line">                <span class="comment"># print ("He has no wife.")</span></span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            links2 = eachlink.xpath(<span class="string">'dl[@class="def-list"]'</span>)</span><br><span class="line">            <span class="keyword">for</span> eachlink2 <span class="keyword">in</span> links2:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    title2 = eachlink2.xpath(<span class="string">'dt[@class="def-list__title"]/text()'</span>)[<span class="number">0</span>].replace(<span class="string">"\r"</span>,<span class="string">""</span>).replace(<span class="string">"\n"</span>,<span class="string">""</span>).replace(<span class="string">"\t"</span>,<span class="string">""</span>)</span><br><span class="line">                <span class="keyword">except</span> IndexError:</span><br><span class="line">                    <span class="comment"># print ("no title")</span></span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">                <span class="keyword">if</span> title2 == <span class="string">"father:"</span> <span class="keyword">or</span> title2 == <span class="string">"mother:"</span> <span class="keyword">or</span> title2 == <span class="string">"spouse:"</span> <span class="keyword">or</span> title2 == <span class="string">"children:"</span> <span class="keyword">or</span> title2 == <span class="string">"spouses:"</span>:</span><br><span class="line">                    text = eachlink2.xpath(<span class="string">'dd[@class="def-list__text"]/text()'</span>)[<span class="number">0</span>].replace(<span class="string">"\r"</span>,<span class="string">""</span>).replace(<span class="string">"\n"</span>,<span class="string">""</span>).replace(<span class="string">"\t"</span>,<span class="string">""</span>).replace(<span class="string">"â"</span>,<span class="string">"—"</span>).strip()</span><br><span class="line">                    <span class="keyword">if</span> title2 == <span class="string">"spouses:"</span>:</span><br><span class="line">                        <span class="keyword">if</span> celebrity[<span class="string">"spouse"</span>] == <span class="string">""</span>:</span><br><span class="line">                            celebrity[<span class="string">"spouse"</span>] = text</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            celebrity[<span class="string">"spouse"</span>] += <span class="string">"; "</span> + text</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">if</span> celebrity[title2[:<span class="number">-1</span>]] == <span class="string">""</span>:</span><br><span class="line">                            celebrity[title2[:<span class="number">-1</span>]] = text</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            celebrity[title2[:<span class="number">-1</span>]] += <span class="string">"; "</span> + text</span><br><span class="line">                        <span class="comment"># print (text)</span></span><br><span class="line">                        <span class="keyword">if</span> title2 == <span class="string">"children:"</span>:</span><br><span class="line">                            <span class="keyword">if</span> celebrity[<span class="string">"how many children"</span>] == <span class="string">""</span>:</span><br><span class="line">                                celebrity[<span class="string">"how many children"</span>] = <span class="number">1</span></span><br><span class="line">                            <span class="keyword">else</span>:</span><br><span class="line">                                celebrity[<span class="string">"how many children"</span>] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"[%d] Get!"</span> % number)</span><br><span class="line">    <span class="keyword">return</span> (celebrity)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    name = input(<span class="string">'name: '</span>)</span><br><span class="line">    strict = input(<span class="string">'strict: '</span>)</span><br><span class="line">    limit = input(<span class="string">'limit: '</span>)</span><br><span class="line">    celebrity = crawl(name, <span class="number">0</span>, strict, limit)</span><br><span class="line">    <span class="keyword">print</span> (json.dumps(celebrity,sort_keys=<span class="keyword">True</span>, indent=<span class="number">4</span>, separators=(<span class="string">','</span>, <span class="string">': '</span>)))</span><br></pre></td></tr></table></figure>
+<h2 id="将人物相关信息填入表格"><a href="#将人物相关信息填入表格" class="headerlink" title="将人物相关信息填入表格"></a>将人物相关信息填入表格</h2><p>这一步没有什么好说明的，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">wtable.write(i,<span class="number">6</span>,celebrity[<span class="string">'Background'</span>])</span><br><span class="line">wtable.write(i,<span class="number">7</span>,celebrity[<span class="string">'Birthday'</span>])</span><br><span class="line">wtable.write(i,<span class="number">8</span>,celebrity[<span class="string">'Birthplace'</span>])</span><br><span class="line">wtable.write(i,<span class="number">9</span>,celebrity[<span class="string">'Foreign'</span>])</span><br><span class="line">wtable.write(i,<span class="number">10</span>,celebrity[<span class="string">'Education'</span>])</span><br><span class="line">wtable.write(i,<span class="number">11</span>,celebrity[<span class="string">'Career'</span>])</span><br><span class="line">wtable.write(i,<span class="number">12</span>,celebrity[<span class="string">'Personality'</span>])</span><br><span class="line">wtable.write(i,<span class="number">13</span>,celebrity[<span class="string">'Connections-Married'</span>])</span><br><span class="line">wtable.write(i,<span class="number">14</span>,celebrity[<span class="string">'father'</span>])</span><br><span class="line">wtable.write(i,<span class="number">15</span>,celebrity[<span class="string">'mother'</span>])</span><br><span class="line">wtable.write(i,<span class="number">16</span>,celebrity[<span class="string">'spouse'</span>])</span><br><span class="line">wtable.write(i,<span class="number">17</span>,celebrity[<span class="string">'how many children'</span>])</span><br><span class="line">wtable.write(i,<span class="number">18</span>,celebrity[<span class="string">'children'</span>])</span><br><span class="line">wtable.write(i,<span class="number">35</span>,<span class="string">"%.2f%%"</span> % (celebrity[<span class="string">"reliability"</span>]*<span class="number">100</span>))</span><br><span class="line">wtable.write(i,<span class="number">36</span>,name)</span><br><span class="line">wtable.write(i,<span class="number">37</span>,celebrity[<span class="string">'name'</span>])</span><br><span class="line">wdata.save(path)</span><br></pre></td></tr></table></figure>
+<h2 id="使用多线程加快爬取速度"><a href="#使用多线程加快爬取速度" class="headerlink" title="使用多线程加快爬取速度"></a>使用多线程加快爬取速度</h2><p>由于网络爬虫多是I/O密集型代码，加上我所爬取的网站更是国外网站，访问速度极慢，我出于这一考虑使用了<code>multiprocessing.dummy</code>的多线程，而不是对CPU密集型代码友好的多进程（虽然经常听说Python 的多线程是鸡肋）。</p>
+<div class="note warning"><p>然而网上许多网络爬虫的例子中，仍然使用了multiprocessing的多进程，我没有深入研究，尚不明其原因。</p></div>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing.dummy <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process</span><span class="params">(i)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">pool = Pool(processes=<span class="number">4</span>)</span><br><span class="line">pool.map(process,range(start,end))</span><br></pre></td></tr></table></figure>
+<h2 id="将程序打包成可执行文件"><a href="#将程序打包成可执行文件" class="headerlink" title="将程序打包成可执行文件"></a>将程序打包成可执行文件</h2><p>一开始我试图使用pyinstaller在Linux上打包成Windows的exe后缀文件，当然是没有成功的，可执行文件需要在对应平台生成。但似乎可以使用wine来达成这个效果，未尝试。</p>
+<p>于是我将代码转到windows上，并安装各种依赖，遇到了很多问题，主要是：</p>
+<ol>
+<li>安装Levenshtein库时提示<code>Microsoft Visual C++ 14.0 is required</code>，照提示安装完Microsoft Visual C++ 14.0之后，仍出现问题（未截屏，难以说明），后google得知要移动某一文件的位置，最终解决了问题。</li>
+<li>使用pyinstaller直接打包产生问题</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error loading Python DLL <span class="string">'C:\Users\Candlend\Desktop\prabook_crawler\build\test\python36.dll'</span></span><br><span class="line">LoadLibrary: 找不到指定的模块</span><br></pre></td></tr></table></figure>
+<p>后将<code>C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\python36.dll</code>移动到该位置后，打包测试用的<code>hello_world.exe</code>正常运行，然而<code>prabook_crawler</code>的可执行文件仍然报错，但报错信息变为<code>No module named &#39;_socket&#39;</code>。但我的python并没有缺少这一模块，不明其原因。最后使用<code>pyinstaller -F</code>指令生成单个可执行文件，没有产生问题。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>第一次尝试写网络爬虫，就结果而言，目的达成，但程序仍有许多不足之处，这篇博客中也有很多不准确的说法。目前很多东西还是本着不求甚解的态度，没有去深入研究。但我先将所遇到的问题记录下来，一方面是希望获得指点，解答我的疑问，一方面是想在以后的学习中，结合新遇到的问题一起系统地研究，之后完善这篇博客。</p>
+<p>执行效果如图：</p>
+<p><img src="http://p2bh4l69u.bkt.clouddn.com/prabook_crawler/result.png" alt="result"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://p2bh4l69u.bkt.clouddn.com/wechatpay.png" alt="Candle End 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://p2bh4l69u.bkt.clouddn.com/alipay.jpg" alt="Candle End 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Candle End
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://candlend.cn/2018/01/18/prabook_crawler/" title="python爬虫实战学习笔记">http://candlend.cn/2018/01/18/prabook_crawler/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/11/Masterpiece_of_Life/" rel="next" title="生命的杰作">
+                <i class="fa fa-chevron-left"></i> 生命的杰作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/25/spaceShooterDemo/" rel="prev" title="Unity初步学习：Space Shooter">
+                Unity初步学习：Space Shooter <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a55e453f86f6c73" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://p2bh4l69u.bkt.clouddn.com/avatar.jpg"
+                alt="Candle End" />
+            
+              <p class="site-author-name" itemprop="name">Candle End</p>
+              <p class="site-description motion-element" itemprop="description">宅</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Candlend" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:huangchy@shanghaitech.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://pixiv.me/4507199" target="_blank" title="Pixiv">
+                      
+                        <i class="fa fa-fw fa-paint-brush"></i>Pixiv</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5150578140/home" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          <div id= "musicplayer">
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=902234440&auto=0&height=32"></iframe>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#读取表格，获得人物名字"><span class="nav-number">1.</span> <span class="nav-text">读取表格，获得人物名字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入名字，返回人物相关信息"><span class="nav-number">2.</span> <span class="nav-text">输入名字，返回人物相关信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发起请求"><span class="nav-number">2.1.</span> <span class="nav-text">发起请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析页面结构"><span class="nav-number">2.2.</span> <span class="nav-text">分析页面结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬虫隐藏"><span class="nav-number">2.3.</span> <span class="nav-text">爬虫隐藏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crawler主要代码"><span class="nav-number">2.4.</span> <span class="nav-text">Crawler主要代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将人物相关信息填入表格"><span class="nav-number">3.</span> <span class="nav-text">将人物相关信息填入表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用多线程加快爬取速度"><span class="nav-number">4.</span> <span class="nav-text">使用多线程加快爬取速度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将程序打包成可执行文件"><span class="nav-number">5.</span> <span class="nav-text">将程序打包成可执行文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Candle End</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Power by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Candlend',
+            repo: 'candlend.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e30407a0d9950037f2a8804835c6650b6d6c7678',
+            
+                client_id: '3aed521603221d3d2600'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("w0iLImm5MerYCdSa2fe2fHW6-gzGzoHsz", "YoHORHe3X4wdvxnDq71aQf27");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Evernote";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
